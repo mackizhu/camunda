@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_0z2wbrj" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <decision id="confirm" name="审批决策">
+    <decisionTable id="DecisionTable_16gqcit">
+      <input id="Input_1" label="金额">
+        <inputExpression id="InputExpression_1" typeRef="long">
+          <text>money</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="是否同意" name="approved" typeRef="boolean" />
+      <rule id="DecisionRule_0mff6lc">
+        <inputEntry id="UnaryTests_1y9pw0c">
+          <text>[6000..8000]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17u4gpt">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1hl7ieo">
+        <inputEntry id="UnaryTests_0x937on">
+          <text>&lt;6000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18p67qf">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1e83l7b">
+        <inputEntry id="UnaryTests_11n47nk">
+          <text>&gt;8000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mdcwch">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="confirm">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

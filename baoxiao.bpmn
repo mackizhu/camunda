@@ -31,7 +31,7 @@
       <bpmn:incoming>Flow_0lr7zzk</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0lr7zzk" sourceRef="Activity_1jsyowu" targetRef="Event_18mx2o6" />
-    <bpmn:userTask id="Activity_0eyzcd9" name="公司领导审核" camunda:assignee="mary">
+    <bpmn:userTask id="Activity_0eyzcd9" name="公司领导审核" camunda:assignee="demo">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="money" label="金额" type="long" />
@@ -42,7 +42,7 @@
       <bpmn:incoming>Flow_1utxcy2</bpmn:incoming>
       <bpmn:outgoing>Flow_121q93r</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_04n8ewb" name="部门领导审核" camunda:assignee="john">
+    <bpmn:userTask id="Activity_04n8ewb" name="部门领导审核" camunda:assignee="demo">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="money" label="金额" type="long" />
@@ -83,11 +83,16 @@
     <bpmn:sequenceFlow id="Flow_0zohh38" name="拒绝" sourceRef="Gateway_1xislri" targetRef="Event_027hgw8">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="Activity_1jsyowu" name="财务审核" camunda:assignee="demo">
+    <bpmn:businessRuleTask id="Activity_1jsyowu" name="财务审核" camunda:resultVariable="approved" camunda:decisionRef="confirm" camunda:mapDecisionResult="singleEntry">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_2cfdem3" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1wuc50s</bpmn:incoming>
       <bpmn:incoming>Flow_1fr7cgd</bpmn:incoming>
       <bpmn:outgoing>Flow_0lr7zzk</bpmn:outgoing>
-    </bpmn:userTask>
+    </bpmn:businessRuleTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0z7iks6">
@@ -190,14 +195,14 @@
       <bpmndi:BPMNShape id="Event_18mx2o6_di" bpmnElement="Event_18mx2o6">
         <dc:Bounds x="892" y="232" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0o60mcp_di" bpmnElement="Activity_1jsyowu">
-        <dc:Bounds x="730" y="210" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1ve6m7z_di" bpmnElement="Activity_04n8ewb">
         <dc:Bounds x="460" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_12fwrde_di" bpmnElement="Activity_0eyzcd9">
         <dc:Bounds x="460" y="340" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1k2syyf_di" bpmnElement="Activity_1jsyowu">
+        <dc:Bounds x="730" y="210" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
